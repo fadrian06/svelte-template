@@ -4,8 +4,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "lint": "biome lint src",
-    "lint:fix": "biome check src --apply",
+    "lint": "eslint ./src/* & biome lint src",
+    "lint:fix": "eslint ./src/* --fix & biome check src --apply",
     "format": "biome format src --write"
   },
   "devDependencies": {
@@ -13,6 +13,8 @@
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-terser": "^0.4.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-svelte": "^2.35.1",
     "rollup": "^3.15.0",
     "rollup-plugin-css-only": "^4.3.0",
     "rollup-plugin-livereload": "^2.0.0",
