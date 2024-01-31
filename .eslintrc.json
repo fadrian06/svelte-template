@@ -1,5 +1,5 @@
 {
-  "env": { "browser": true },
+  "env": { "browser": true, "node": true },
   "extends": ["eslint:all", "plugin:svelte/all"],
   "parserOptions": { "sourceType": "module", "ecmaVersion": 2022 },
   "rules": {
