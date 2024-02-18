@@ -1,6 +1,6 @@
 /* eslint-disable init-declarations */
 
-import  { spawn } from 'node:child_process'
+import { spawn } from 'node:child_process'
 import svelte from 'rollup-plugin-svelte'
 import commonjs from '@rollup/plugin-commonjs'
 import terser from '@rollup/plugin-terser'
@@ -24,7 +24,7 @@ function serve() {
       if (server) {
         return
       }
-      server = spawn('npm', ['run', 'start', '--', '--dev'], {
+      server = spawn('npm', ['run', 'start', '--', '--dev', '--host'], {
         shell: true,
         stdio: ['ignore', 'inherit', 'inherit']
       })
@@ -35,13 +35,14 @@ function serve() {
   }
 }
 
+/** @type {import('rollup').RollupOptions} */
 export default {
   input: 'src/main.js',
   output: {
     file: 'public/build/bundle.js',
     format: 'iife',
     name: 'app',
-    sourcemap: true
+    sourcemap: true,
   },
   plugins: [
     svelte({
