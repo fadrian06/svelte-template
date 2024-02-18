@@ -1,4 +1,6 @@
-import { spawn } from 'child_process'
+/* eslint-disable init-declarations */
+
+import  { spawn } from 'node:child_process'
 import svelte from 'rollup-plugin-svelte'
 import commonjs from '@rollup/plugin-commonjs'
 import terser from '@rollup/plugin-terser'

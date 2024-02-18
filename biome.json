@@ -58,7 +58,8 @@
         "all": true
       },
       "nursery": {
-        "all": true
+        "all": true,
+        "noNodejsModules": "off"
       },
       "performance": {
         "all": true
@@ -67,7 +68,8 @@
         "all": true
       },
       "style": {
-        "all": true
+        "all": true,
+        "noDefaultExport": "off"
       },
       "suspicious": {
         "all": true
