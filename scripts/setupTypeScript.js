@@ -3,9 +3,9 @@
 /** This script modifies the project to support TS code in .svelte files like:
 
   <script lang="ts">
-  	export let name: string;
+    export let name: string;
   </script>
- 
+
   As well as validating the code for CI.
 */
 
@@ -28,12 +28,12 @@ const packageJson = JSON.parse(
 )
 
 packageJson.devDependencies = Object.assign(packageJson.devDependencies, {
+  '@rollup/plugin-typescript': '^11.0.0',
+  '@tsconfig/svelte': '^3.0.0',
   'svelte-check': '^3.0.0',
   'svelte-preprocess': '^5.0.0',
-  '@rollup/plugin-typescript': '^11.0.0',
-  typescript: '^4.9.0',
   tslib: '^2.5.0',
-  '@tsconfig/svelte': '^3.0.0'
+  typescript: '^4.9.0'
 })
 
 // Add script for checking
@@ -47,7 +47,8 @@ fs.writeFileSync(
   JSON.stringify(packageJson, null, '  ')
 )
 
-// mv src/main.js to main.ts - note, we need to edit rollup.config.js for this too
+/* mv src/main.js to main.ts - note, we need to edit
+rollup.config.js for this too */
 const beforeMainJsPath = path.join(projectRoot, 'src', 'main.js')
 const afterMainTsPath = path.join(projectRoot, 'src', 'main.ts')
 fs.renameSync(beforeMainJsPath, afterMainTsPath)
@@ -65,14 +66,14 @@ let rollupConfig = fs.readFileSync(rollupConfigPath, 'utf8')
 
 // Edit imports
 rollupConfig = rollupConfig.replace(
-  `'rollup-plugin-css-only';`,
-  `'rollup-plugin-css-only';
-import sveltePreprocess from 'svelte-preprocess';
-import typescript from '@rollup/plugin-typescript';`
+  "'rollup-plugin-css-only'",
+  `'rollup-plugin-css-only'
+import sveltePreprocess from 'svelte-preprocess'
+import typescript from '@rollup/plugin-typescript'`
 )
 
 // Replace name of entry point
-rollupConfig = rollupConfig.replace(`'src/main.js'`, `'src/main.ts'`)
+rollupConfig = rollupConfig.replace("'src/main.js'", "'src/main.ts'")
 
 // Add preprocessor
 rollupConfig = rollupConfig.replace(
@@ -112,7 +113,7 @@ fs.writeFileSync(svelteConfigPath, svelteConfig)
 
 // Add global.d.ts
 const dtsPath = path.join(projectRoot, 'src', 'global.d.ts')
-fs.writeFileSync(dtsPath, `/// <reference types="svelte" />`)
+fs.writeFileSync(dtsPath, '/// <reference types="svelte" />')
 
 // Delete this script, but not during testing
 if (!argv[2]) {
